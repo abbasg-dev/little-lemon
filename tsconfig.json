@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["src", "src/constants/custom.d.ts", "src/**/*.tsx", "src/**/*.ts"]
+}

@@ -1,38 +1,60 @@
-.App {
-  text-align: center;
+* {
+  --font-Karla: "Karla", sans-serif;
+  --font-Markazi: "Markazi Text", serif;
+  --primary-green: #495e57;
+  --primary-yellow: #f4ce14;
+  --secondary-orange: #ee9972;
+  --secondary-beige: #fbdabb;
+  --secondary-grey: #edefee;
+  --secondary-black: #333333;
+  --dark-grey: rgb(92, 92, 92);
+  padding: 0px;
+  margin: 0px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+li {
+  list-style-type: none;
+  font-size: 16px;
+  font-weight: bold;
+  font-family: var(--font-Karla);
+  color: var(--secondary-black);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.nav-flex-container {
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 10vw;
+}
+
+.active-link {
+  background-color: #495e57;
+  border-radius: 8px;
+  color: white;
+  padding: 5px 10px;
+}
+
+.links-flex-container {
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  gap: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.navbar-hamburger {
+  display: none;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+.navbar-standard {
+  display: block;
+}
+
+@media (max-width: 810px) {
+  .navbar-hamburger {
+    display: block;
   }
-  to {
-    transform: rotate(360deg);
+
+  .navbar-standard {
+    display: none;
   }
 }
