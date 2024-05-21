@@ -46,13 +46,21 @@ const ReservationForm = ({
             <DatePicker
               selected={values.date}
               onChange={(date) => {
-                setFieldValue("date", date);
-                dispatchOnDateChange(date);
+                if (date) {
+                  setFieldValue("date", date);
+                  dispatchOnDateChange(date);
+                }
               }}
               minDate={minimumDate}
               dateFormat="yyyy/MM/dd"
               name="date"
               id="date"
+              autoComplete="off"
+              onKeyDown={(e) => {
+                if (e.keyCode === 8) {
+                  e.preventDefault();
+                }
+              }}
             />
             <ErrorMessage
               name="date"
@@ -63,7 +71,7 @@ const ReservationForm = ({
           <div className="form-field">
             <label htmlFor="time">Time</label>
             <Field as="select" name="time" id="time">
-              {availableTimes.map((time) => (
+              {availableTimes?.map((time) => (
                 <option key={time} value={time}>
                   {time}
                 </option>

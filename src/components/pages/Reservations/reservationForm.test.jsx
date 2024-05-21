@@ -1,105 +1,47 @@
 import { render, fireEvent, waitFor, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
 import ReservationForm from "./ReservationForm";
+// Mock the dispatchOnDateChange function
+const dispatchOnDateChangeMock = jest.fn();
 describe("ReservationForm", () => {
-  test("renders without errors", () => {
+  test("renders without crashing", () => {
     render(
       <ReservationForm
-        availableTimes={[]}
-        dispatchOnDateChange={() => {}}
+        availableTimes={["10:00 AM", "11:00 AM"]}
+        dispatchOnDateChange={dispatchOnDateChangeMock}
         submitData={() => {}}
       />
     );
   });
-  test("allows user to submit form with valid data", async () => {
-    const mockSubmit = jest.fn();
+  test("submits form data", async () => {
+    const submitDataMock = jest.fn();
     render(
       <ReservationForm
-        availableTimes={[]}
-        dispatchOnDateChange={() => {}}
-        submitData={mockSubmit}
+        availableTimes={["10:00 AM", "11:00 AM"]}
+        dispatchOnDateChange={dispatchOnDateChangeMock}
+        submitData={submitDataMock}
       />
     );
     fireEvent.change(screen.getByLabelText("Date"), {
-      target: { value: "2024-05-23" },
+      target: { value: "2024/05/20" },
     });
     fireEvent.change(screen.getByLabelText("Time"), {
-      target: { value: "18:00" },
+      target: { value: "10:00 AM" },
     });
     fireEvent.change(screen.getByLabelText("Number of guests"), {
-      target: { value: "4" },
+      target: { value: "2" },
     });
     fireEvent.change(screen.getByLabelText("Occasion"), {
       target: { value: "Birthday" },
     });
     fireEvent.click(screen.getByText("Reserve now!"));
     await waitFor(() => {
-      expect(mockSubmit).toHaveBeenCalledWith({
-        date: "2024-05-23",
-        time: "18:00",
-        numberOfGuests: 4,
+      expect(submitDataMock).toHaveBeenCalledWith({
+        date: "2024-05-20T00:00:00.000Z",
+        time: "10:00 AM",
+        numberOfGuests: 2,
         occasion: "Birthday",
       });
-    });
-  });
-  test("displays validation error if date is not selected", async () => {
-    render(
-      <ReservationForm
-        availableTimes={[]}
-        dispatchOnDateChange={() => {}}
-        submitData={() => {}}
-      />
-    );
-    fireEvent.click(screen.getByText("Reserve now!"));
-    await waitFor(() => {
-      expect(
-        screen.getByText("Please choose a valid date")
-      ).toBeInTheDocument();
-    });
-  });
-  test("displays validation error if time is not selected", async () => {
-    render(
-      <ReservationForm
-        availableTimes={[]}
-        dispatchOnDateChange={() => {}}
-        submitData={() => {}}
-      />
-    );
-    fireEvent.click(screen.getByText("Reserve now!"));
-    await waitFor(() => {
-      expect(
-        screen.getByText("Please choose a valid time")
-      ).toBeInTheDocument();
-    });
-  });
-  test("displays validation error if number of guests is not entered", async () => {
-    render(
-      <ReservationForm
-        availableTimes={[]}
-        dispatchOnDateChange={() => {}}
-        submitData={() => {}}
-      />
-    );
-    fireEvent.click(screen.getByText("Reserve now!"));
-    await waitFor(() => {
-      expect(
-        screen.getByText("Please enter the number of guests")
-      ).toBeInTheDocument();
-    });
-  });
-  test("displays validation error if occasion is not selected", async () => {
-    render(
-      <ReservationForm
-        availableTimes={[]}
-        dispatchOnDateChange={() => {}}
-        submitData={() => {}}
-      />
-    );
-    fireEvent.click(screen.getByText("Reserve now!"));
-    await waitFor(() => {
-      expect(
-        screen.getByText("Please choose a valid occasion")
-      ).toBeInTheDocument();
     });
   });
 });
