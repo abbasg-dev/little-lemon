@@ -5,7 +5,12 @@ import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-time-picker/dist/TimePicker.css";
 import "react-clock/dist/Clock.css";
-const ReservationForm = ({
+interface ReservationFormProps {
+  availableTimes: string[];
+  dispatchOnDateChange: (type: string, payload?: any) => void;
+  submitData: (formData: any) => void;
+}
+const ReservationForm: React.FC<ReservationFormProps> = ({
   availableTimes,
   dispatchOnDateChange,
   submitData,
@@ -70,13 +75,17 @@ const ReservationForm = ({
           </div>
           <div className="form-field">
             <label htmlFor="time">Time</label>
-            <Field as="select" name="time" id="time">
-              {availableTimes?.map((time) => (
-                <option key={time} value={time}>
-                  {time}
-                </option>
-              ))}
-            </Field>
+            <Select
+              aria-label="Time"
+              options={availableTimes.map((time) => ({
+                value: time,
+                label: time,
+              }))}
+              name="time"
+              id="time"
+              value={{ value: values.time, label: values.time }}
+              onChange={(option) => setFieldValue("time", option.value)}
+            />
             <ErrorMessage
               name="time"
               component="div"
@@ -101,6 +110,7 @@ const ReservationForm = ({
           <div className="form-field">
             <label htmlFor="occasion">Occasion</label>
             <Select
+              aria-label="Occasion"
               options={occasions}
               name="occasion"
               id="occasion"
@@ -123,4 +133,5 @@ const ReservationForm = ({
     </Formik>
   );
 };
+
 export default ReservationForm;

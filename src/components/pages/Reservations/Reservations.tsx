@@ -1,9 +1,11 @@
-import { useReducer, useEffect } from "react";
+import React, { useReducer, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as ROUTES from "constants/routes";
+import * as Keys from "constants/constants";
 import ReservationForm from "./ReservationForm";
 import { initializeTimes, submitAPI, updateTimes } from "utils/helpers";
 import "./Reservations.css";
+
 const Reservations = () => {
   const [availableTimes, dispatchOnDateChange] = useReducer(
     updateTimes,
@@ -11,12 +13,13 @@ const Reservations = () => {
     initializeTimes
   );
   const navigate = useNavigate();
+
   useEffect(() => {
     const initializeTimesAndFetch = async () => {
       try {
-        const response = await initializeTimes();
+        const response = initializeTimes();
         dispatchOnDateChange({
-          type: "SET_AVAILABLE_TIMES",
+          type: Keys.SET_AVAILABLE_TIMES,
           payload: response,
         });
       } catch (error) {
@@ -25,10 +28,12 @@ const Reservations = () => {
     };
     initializeTimesAndFetch();
   }, []);
+
   const submitData = (formData) => {
     const response = submitAPI(formData);
     if (response) navigate(ROUTES.CONFIRMED);
   };
+
   return (
     <div className="reservations">
       <h2>Table reservation</h2>
@@ -40,4 +45,5 @@ const Reservations = () => {
     </div>
   );
 };
+
 export default Reservations;

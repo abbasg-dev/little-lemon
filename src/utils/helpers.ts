@@ -1,7 +1,7 @@
 import { addHours, eachHourOfInterval, format } from "date-fns";
 import * as Keys from "constants/constants";
 
-const updateTimes = (state, action) => {
+export const updateTimes = (state, action) => {
   switch (action.type) {
     case Keys.SET_AVAILABLE_TIMES:
       return action.payload;
@@ -10,7 +10,7 @@ const updateTimes = (state, action) => {
   }
 };
 
-const initializeTimes = () => {
+export const initializeTimes = () => {
   const startDate = new Date();
   const endDate = addHours(startDate, 6);
   const hours = eachHourOfInterval({ start: startDate, end: endDate });
@@ -18,8 +18,6 @@ const initializeTimes = () => {
   return availableTimes;
 };
 
-const submitAPI = (formData) => {
+export const submitAPI = (formData) => {
   return true;
 };
-
-export { updateTimes, initializeTimes, submitAPI };

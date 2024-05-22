@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "components/layout";
 import Home from "components/pages/Home";
-import Reservations from "components/pages/Reservations";
+import Reservations from "components/pages/Reservations/Reservations";
 import ConfirmedReservation from "components/pages/Reservations/Confirmed";
 import NotFound from "components/pages/NotFound";
 import * as ROUTES from "constants/routes";
