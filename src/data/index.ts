@@ -31,7 +31,7 @@ export const links: Links[] = [
   },
   {
     name: "Reservations",
-    path: ROUTES.RESERVATIONS,
+    path: ROUTES.BOOKING_FORM,
     hashLink: false,
   },
   {

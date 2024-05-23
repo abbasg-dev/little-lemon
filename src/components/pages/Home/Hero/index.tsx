@@ -13,7 +13,7 @@ const Hero = () => {
             We are a family owned Mediterranean restaurant, focused on
             traditional recipes served with a modern twist.
           </div>
-          <HashLink className="button-primary" to={ROUTES.RESERVATIONS}>
+          <HashLink className="button-primary" to={ROUTES.BOOKING_FORM}>
             Reserve a table
           </HashLink>
         </div>

@@ -1,7 +1,8 @@
 import Icons from "assets/icons";
+import "./BookingForm.css";
 const Confirmed = () => {
   return (
-    <div className="container confirmed-reservation">
+    <div className="confirmed-reservation">
       <Icons.SUCCESS />
       <h2>Your table has been confirmed!</h2>
       <p>

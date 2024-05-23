@@ -11,13 +11,17 @@ export const updateTimes = (state, action) => {
 };
 
 export const initializeTimes = () => {
-  const startDate = new Date();
-  const endDate = addHours(startDate, 6);
-  const hours = eachHourOfInterval({ start: startDate, end: endDate });
-  const availableTimes = hours.map((hour) => format(hour, "HH:mm"));
-  return availableTimes;
+  const today = new Date();
+  return fetchAPI(today);
 };
 
 export const submitAPI = (formData) => {
   return true;
+};
+
+export const fetchAPI = (date: Date): string[] => {
+  const endDate = addHours(date, 6);
+  const hours = eachHourOfInterval({ start: date, end: endDate });
+  const availableTimes = hours.map((hour) => format(hour, "HH:mm"));
+  return availableTimes;
 };
